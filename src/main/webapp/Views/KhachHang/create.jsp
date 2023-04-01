@@ -11,12 +11,12 @@
     <title>Thêm mới khách hàng</title>
     <link rel="stylesheet" href="/demo_war_exploded/css/bootstrap.min.css"/>
 </head>
-<body>
+<body class="container">
 <div class="col-8 offset-2 mt-3">
     <form name="myForm"
           method="POST"
-          action="/demo_war_exploded/khach-hang/store" onsubmit="
-          return validateForm()">
+          action="/demo_war_exploded/khach-hang/store"
+          onsubmit="return validateForm()">
         <div class="row">
             <div class="col-6">
                 <label for="ma">Mã</label>
