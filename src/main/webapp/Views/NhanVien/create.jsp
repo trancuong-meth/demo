@@ -2,27 +2,25 @@
   Created by IntelliJ IDEA.
   User: Tran Tuan Cuong
   Date: 14/3/2023
-  Time: 8:49 PM
+  Time: 6:26 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Thêm mới nhân viên</title>
-    <link rel="stylesheet" href="/demo_war_exploded/css/bootstrap.css">
-
+    <title>Thêm mới khách hàng</title>
+    <link rel="stylesheet" href="/demo_war_exploded/css/bootstrap.min.css"/>
 </head>
 <body class="container">
 <div class="col-8 offset-2 mt-3">
-    <form method="POST"
-          name="myForm"
+    <form name="myForm"
+          method="POST"
           action="/demo_war_exploded/nhan-vien/store"
           onsubmit="return validateForm()">
         <div class="row">
             <div class="col-6">
-                <label for="ma">Mã</label>
-                <input type="text" id="ma" name="ma" class="form-control"/>
-                <span class="error-message" id="username-error"></span>
+                <label>Mã</label>
+                <input type="text" name="ma" class="form-control" />
             </div>
             <div class="col-6">
                 <label for="ten">Tên</label>
@@ -43,16 +41,16 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-12">
+            <div class="col-6">
                 <label>Giới tính</label>
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="gioiTinh" id="nam"
-                           value="Nam">
+                           value="Nam"/>
                     <label class="form-check-label" for="nam">Nam</label>
                 </div>
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="gioiTinh" id="nu"
-                           value="Nữ">
+                           value="Nữ"/>
                     <label class="form-check-label" for="nu">Nữ</label>
                 </div>
             </div>
@@ -82,23 +80,24 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-12">
+            <div class="col-6">
                 <label>Trạng thái</label>
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="trangThai" id="dlv"
-                           value="Đang làm việc">
+                           value="0"/>
                     <label class="form-check-label" for="dlv">Đã nghỉ việc</label>
                 </div>
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="trangThai" id="dnv"
-                           value="Đã nghỉ việc">
+                           value="1"/>
                     <label class="form-check-label" for="dnv">Đã nghỉ việc</label>
                 </div>
             </div>
         </div>
+
         <div class="row">
             <div class="col-6">
-                <input type="submit" class="btn btn-primary" value="Thêm mới"/>
+                <input type="submit" class="btn btn-primary" value="Thêm nhân viên"/>
             </div>
         </div>
     </form>

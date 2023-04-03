@@ -44,7 +44,7 @@
                 <td>${ nv.diaChi }</td>
                 <td>${ nv.sdt }</td>
                 <td>${ nv.matKhau }</td>
-                <td>${ nv.trangThai}</td>
+                <td>${ nv.trangThai == "0" ? "Đang làm việc" : "Đã nghỉ việc" }</td>
                 <td>
                     <a class="btn btn-success" role="button" href="/demo_war_exploded/nhan-vien/edit?ma=${ nv.ma }">Cập nhật</a>
                     <a class="btn btn-danger" role="button" href="/demo_war_exploded/nhan-vien/delete?ma=${ nv.ma }">Xoá</a>

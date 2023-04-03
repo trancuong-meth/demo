@@ -43,7 +43,7 @@ public class NhanVienServlet extends HttpServlet {
             this.edit(req, resp);
         } else if (uri.contains("/delete")) {
             this.delete(req, resp);
-        } else if (uri.contains("/index")) {
+        } else {
             this.index(req, resp);
         }
     }
@@ -61,7 +61,7 @@ public class NhanVienServlet extends HttpServlet {
         } else if (uri.contains("/store")) {
             this.store(req, resp);
         } else {
-            resp.sendRedirect("/demo_war_exploded/chuc-vu/index");
+            resp.sendRedirect("/demo_war_exploded/nhan-vien/index");
         }
     }
 

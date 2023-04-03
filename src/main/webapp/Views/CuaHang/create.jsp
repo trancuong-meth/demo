@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: Tran Tuan Cuong
   Date: 14/3/2023
-  Time: 8:49 PM
+  Time: 6:26 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -10,15 +10,13 @@
 <head>
     <title>Thêm mới cửa hàng</title>
     <link rel="stylesheet" href="/demo_war_exploded/css/bootstrap.min.css"/>
-
 </head>
 <body class="container">
 <div class="col-8 offset-2 mt-3">
-    <form
-            name="myForm"
-            method="POST"
-            action="/demo_war_exploded/cua-hang/store"
-            onsubmit="return validateForm()" >
+    <form name="myForm"
+          method="POST"
+          action="/demo_war_exploded/cua-hang/store"
+          onsubmit="return validateForm()">
         <div class="row">
             <div class="col-6">
                 <label for="ma">Mã</label>
@@ -29,6 +27,13 @@
                 <label for="ten">Tên</label>
                 <input type="text" id="ten" name="ten" class="form-control"/>
                 <span class="error-message" id="username-error1"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <label for="diaChi">Địa chỉ</label>
+                <input type="text" id="diaChi" name="diaChi" class="form-control"/>
+                <span class="error-message" id="username-error6"></span>
             </div>
         </div>
         <div class="row">
@@ -48,12 +53,6 @@
                 </select>
             </div>
         </div>
-        <div class="row">
-            <label for="diaChi">Địa chỉ</label>
-            <input type="text" id="diaChi" name="diaChi" class="form-control"/>
-            <span class="error-message" id="username-error2"></span>
-        </div>
-
 
         <div class="row">
             <div class="col-6">
@@ -69,26 +68,54 @@
         var flag = true;
         var ten = document.forms["myForm"]["ten"].value,
             ma = document.forms["myForm"]["ma"].value,
-            dia_chi = document.forms["myForm"]["dia_chi"].value;
+            dia_chi = document.forms["myForm"]["diaChi"].value;
         if (ten == "") {
-            document.getElementById("username-error1").innerHTML = "Vui lòng nhập tên cửa hàng";
+            document.getElementById("username-error1").innerHTML = "Vui lòng nhập tên chức vụ";
             flag = false;
         } else {
             document.getElementById("username-error1").innerHTML = ""
         }
 
         if (ma == "") {
-            document.getElementById("username-error").innerHTML = "Vui lòng nhập mã cửa hàng";
+            document.getElementById("username-error").innerHTML = "Vui lòng nhập mã chức vụ";
             flag = false;
         } else {
             document.getElementById("username-error").innerHTML = ""
         }
 
-        if (dia_chi == "") {
-            document.getElementById("username-error2").innerHTML = "Vui lòng nhập địa chỉ cửa hàng";
+        if (ngay_sinh == "") {
+            document.getElementById("username-error4").innerHTML = "Vui lòng nhập mã chức vụ";
             flag = false;
         } else {
-            document.getElementById("username-error2").innerHTML = "";
+            document.getElementById("username-error4").innerHTML = ""
+        }
+
+        if (ten_dem == "") {
+            document.getElementById("username-error2").innerHTML = "Vui lòng nhập mã chức vụ";
+            flag = false;
+        } else {
+            document.getElementById("username-error2").innerHTML = ""
+        }
+
+        if (ho == "") {
+            document.getElementById("username-error3").innerHTML = "Vui lòng nhập mã chức vụ";
+            flag = false;
+        } else {
+            document.getElementById("username-error3").innerHTML = ""
+        }
+
+        if (mat_khau == "") {
+            document.getElementById("username-error7").innerHTML = "Vui lòng nhập mã chức vụ";
+            flag = false;
+        } else {
+            document.getElementById("username-error7").innerHTML = ""
+        }
+
+        if (dia_chi == "") {
+            document.getElementById("username-error6").innerHTML = "Vui lòng nhập mã chức vụ";
+            flag = false;
+        } else {
+            document.getElementById("username-error6").innerHTML = ""
         }
         return flag;
     }

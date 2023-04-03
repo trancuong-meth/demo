@@ -9,13 +9,13 @@
 <html>
 <head>
     <title>Thêm mới nhân viên</title>
-    <link rel="stylesheet" href="/demo_war_exploded/css/bootstrap.css">
+    <link rel="stylesheet" href="/demo_war_exploded/css/bootstrap.css"/>
 
 </head>
 <body class="container">
 <div class="col-8 offset-2 mt-3">
     <form method="POST"
-          action="/demo_war_exploded/nhan-vien/update?ma=${ nv.ma }">
+          action="/demo_war_exploded/nhan-vien/update?ma=${ nv.ma }"/>
         <div class="row">
             <div class="col-6">
                 <label>Mã</label>
@@ -30,7 +30,7 @@
         <div class="row">
             <div class="col-6">
                 <label for="tenDem">Tên đệm</label>
-                <input type="text" id="tenDem" name="tenDem" class="form-control" value=" ${ nv.ten_dem }"/>
+                <input type="text" id="tenDem" name="tenDem" class="form-control" value=" ${ nv.tenDem }"/>
                 <span class="error-message" id="username-error2"></span>
             </div>
             <div class="col-6">
@@ -44,12 +44,12 @@
                 <label>Giới tính</label>
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="gioiTinh" id="nam"
-                           value="Nam" ${ nv.gioi_tinh == "Nam" ? "checked" : ""}>
+                           value="Nam" ${ nv.gioiTinh == "Nam" ? "checked" : ""}/>
                     <label class="form-check-label" for="nam">Nam</label>
                 </div>
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="gioiTinh" id="nu"
-                           value="Nữ" ${ nv.gioi_tinh == "Nữ" ? "checked" : ""}>
+                           value="Nữ" ${ nv.gioiTinh == "Nữ" ? "checked" : ""}/>
                     <label class="form-check-label" for="nu">Nữ</label>
                 </div>
             </div>
@@ -57,7 +57,7 @@
         <div class="row">
             <div class="col-6">
                 <label for="ngaySinh">Ngày sinh</label>
-                <input type="text" id="ngaySinh" name="ngaySinh" class="form-control" value="${nv.ngay_sinh}"/>
+                <input type="text" id="ngaySinh" name="ngaySinh" class="form-control" value="${nv.ngaySinh}"/>
                 <span class="error-message" id="username-error4"></span>
             </div>
             <div class="col-6">
@@ -69,12 +69,12 @@
         <div class="row">
             <div class="col-6">
                 <label for="diaChi">Địa chỉ</label>
-                <input type="text" id="diaChi" name="diaChi" class="form-control" value="${nv.dia_chi}"/>
+                <input type="text" id="diaChi" name="diaChi" class="form-control" value="${nv.diaChi}"/>
                 <span class="error-message" id="username-error6"></span>
             </div>
             <div class="col-6">
                 <label for="matKhau">Mật khẩu</label>
-                <input type="text" id="matKhau" name="matKhau" class="form-control" value="${nv.mat_khau}"/>
+                <input type="text" id="matKhau" name="matKhau" class="form-control" value="${nv.matKhau}"/>
                 <span class="error-message" id="username-error7"></span>
             </div>
         </div>
@@ -83,12 +83,12 @@
                 <label>Trạng thái</label>
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="trangThai" id="dlv"
-                           value="Đang làm việc" ${ nv.trang_thai == "Đang làm việc" ? "checked" : ""}>
+                           value="Đang làm việc" ${ nv.trangThai == "0" ? "checked" : ""}/>
                     <label class="form-check-label" for="dlv">Đã nghỉ việc</label>
                 </div>
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="trangThai" id="dnv"
-                           value="Đã nghỉ việc" ${ nv.trang_thai == "Đã nghỉ việc" ? "checked" : ""}>
+                           value="Đã nghỉ việc" ${ nv.trangThai == "1" ? "checked" : ""}/>
                     <label class="form-check-label" for="dnv">Đã nghỉ việc</label>
                 </div>
             </div>

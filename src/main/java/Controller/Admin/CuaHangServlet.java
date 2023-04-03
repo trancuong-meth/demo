@@ -12,14 +12,15 @@ import org.apache.commons.beanutils.BeanUtils;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 
-@WebServlet({
-        "/cua-hang/index",
-        "/cua-hang/create",
-        "/cua-hang/store",
-        "/cua-hang/delete",
-        "/cua-hang/edit",
-        "/cua-hang/update"
-})
+@WebServlet
+        ({
+                "/cua-hang/index",
+                "/cua-hang/delete",
+                "/cua-hang/edit",
+                "/cua-hang/store",
+                "/cua-hang/update",
+                "/cua-hang/create"
+        })
 public class CuaHangServlet extends HttpServlet {
     private CuaHangRepository chRepo;
 
@@ -27,85 +28,78 @@ public class CuaHangServlet extends HttpServlet {
         this.chRepo = new CuaHangRepository();
     }
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
-        String uri = req.getRequestURI();
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String uri = request.getRequestURI();
 
         if (uri.contains("/create")) {
-            this.create(req, resp);
-        } else if (uri.contains("/edit")) {
-            this.edit(req, resp);
+            this.create(request, response);
         } else if (uri.contains("/delete")) {
-            this.delete(req, resp);
+            this.delete(request, response);
+        } else if (uri.contains("/edit")) {
+            this.edit(request, response);
         } else {
-            this.index(req, resp);
+            this.index(request, response);
         }
     }
 
-    public void create(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
-        req.setAttribute("views", "/Views/CuaHang/create.jsp");
-        req.getRequestDispatcher("/Views/layout.jsp").forward(req, resp);
-        resp.sendRedirect("/demo_war_exploded/cua-hang/index");
+    public void delete(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String ma = request.getParameter("ma");
+        CuaHang ch = this.chRepo.findByMa(ma);
+        this.chRepo.delete(ch);
+        response.sendRedirect("/demo_war_exploded/cua-hang/index");
     }
 
-    public void edit(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
-        String ma = req.getParameter("ma");
-        CuaHang vm = this.chRepo.findByMa(ma);
-        req.setAttribute("ch", vm);
-        req.setAttribute("views", "/Views/CuaHang/edit.jsp");
-        req.getRequestDispatcher("/Views/layout.jsp").forward(req, resp);
+    public void create(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        request.setAttribute("views", "/Views/CuaHang/create.jsp");
+        request.getRequestDispatcher("/Views/layout.jsp").forward(request, response);
     }
 
-    public void delete(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
-        String ma = req.getParameter("ma");
-        CuaHang vm = this.chRepo.findByMa(ma);
-        this.chRepo.delete(vm);
-        resp.sendRedirect("/demo_war_exploded/cua-hang/index");
+    public void index(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        request.setAttribute("listCH", this.chRepo.findAll());
+        request.setAttribute("views", "/Views/CuaHang/index.jsp");
+        request.getRequestDispatcher("/Views/layout.jsp").forward(request, response);
     }
 
-    public void index(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
-        req.setAttribute("listCH", this.chRepo.findAll());
-        req.setAttribute("views", "/Views/CuaHang/index.jsp");
-        req.getRequestDispatcher("/Views/layout.jsp").forward(req, resp);
+    public void edit(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String ma = request.getParameter("ma");
+        CuaHang kh = this.chRepo.findByMa(ma);
+        request.setAttribute("ch", kh);
+        request.setAttribute("views", "/Views/CuaHang/edit.jsp");
+        request.getRequestDispatcher("/Views/layout.jsp").forward(request, response);
     }
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String uri = req.getRequestURI();
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String uri = request.getRequestURI();
 
-        if (uri.contains("/update")) {
-            this.update(req, resp);
-        } else if (uri.contains("/store")) {
-            this.store(req, resp);
+        if (uri.contains("store")) {
+            this.store(request, response);
+        } else if (uri.contains("update")) {
+            this.update(request, response);
         } else {
-            resp.sendRedirect("/demo_war_exploded/cua-hang/index");
+            response.sendRedirect("/demo_war_exploded/cua-hang/index");
         }
+
     }
 
     protected void store(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        CuaHang cv = new CuaHang();
+        CuaHang ch = new CuaHang();
         try {
-            BeanUtils.populate(cv, request.getParameterMap());
-            this.chRepo.insert(cv);
+            BeanUtils.populate(ch, request.getParameterMap());
+            this.chRepo.insert(ch);
         } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         } catch (InvocationTargetException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
         response.sendRedirect("/demo_war_exploded/cua-hang/index");
     }
 
     protected void update(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String ma = request.getParameter("ma");
-        CuaHang domainCH = this.chRepo.findByMa(ma);
+        CuaHang kh = this.chRepo.findByMa(ma);
         try {
-            BeanUtils.populate(domainCH, request.getParameterMap());
-            this.chRepo.update(domainCH);
+            BeanUtils.populate(kh, request.getParameterMap());
+            this.chRepo.update(kh);
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         } catch (InvocationTargetException e) {

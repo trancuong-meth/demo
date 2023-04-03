@@ -32,6 +32,7 @@ public class Hiberbnate {
         conf.addAnnotatedClass(CuaHang.class);
         conf.addAnnotatedClass(SanPham.class);
         conf.addAnnotatedClass(NhanVien.class);
+        conf.addAnnotatedClass(HoaDon.class);
         ServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .applySettings(conf.getProperties()).build();
         FACTORY = conf.buildSessionFactory(registry);

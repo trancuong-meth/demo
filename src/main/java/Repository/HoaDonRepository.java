@@ -1,22 +1,22 @@
 package Repository;
 
-import Entity.CuaHang;
+import Entity.HoaDon;
 import Utitils.Hiberbnate;
 import jakarta.persistence.TypedQuery;
 import org.hibernate.Session;
 
 import java.util.List;
 
-public class CuaHangRepository {
+public class HoaDonRepository {
     private Session hSession;
-    public CuaHangRepository() {
+    public HoaDonRepository() {
         this.hSession = Hiberbnate.getFACTORY().openSession();
     }
 
-    public void insert(CuaHang ch) {
+    public void insert(HoaDon hd) {
         try {
             this.hSession.getTransaction().begin();
-            this.hSession.persist(ch);
+            this.hSession.persist(hd);
             this.hSession.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -24,10 +24,10 @@ public class CuaHangRepository {
         }
     }
 
-    public void delete(CuaHang ch) {
+    public void update(HoaDon hd) {
         try {
             this.hSession.getTransaction().begin();
-            this.hSession.delete(ch);
+            this.hSession.update(hd);
             this.hSession.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -35,10 +35,10 @@ public class CuaHangRepository {
         }
     }
 
-    public void update(CuaHang ch) {
+    public void delete(HoaDon hd) {
         try {
             this.hSession.getTransaction().begin();
-            this.hSession.update(ch);
+            this.hSession.delete(hd);
             this.hSession.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -46,15 +46,15 @@ public class CuaHangRepository {
         }
     }
 
-    public List<CuaHang> findAll() {
-        String hql = "SELECT chObj FROM CuaHang chObj";
-        TypedQuery<CuaHang> q = this.hSession.createQuery(hql, CuaHang.class);
+    public List<HoaDon> findAll() {
+        String hql = "SELECT hdObj FROM HoaDon hdObj";
+        TypedQuery<HoaDon> q = this.hSession.createQuery(hql, HoaDon.class);
         return q.getResultList();
     }
 
-    public CuaHang findByMa(String ma) {
-        String hql = "SELECT chObj FROM CuaHang chObj WHERE chObj.ma = ?1";
-        TypedQuery<CuaHang> q = this.hSession.createQuery(hql, CuaHang.class);
+    public HoaDon findByMa(String ma) {
+        String hql = "SELECT hdObj FROM HoaDon hdObj WHERE hdObj.ma = ?1";
+        TypedQuery<HoaDon> q = this.hSession.createQuery(hql, HoaDon.class);
         q.setParameter(1, ma);
         return q.getSingleResult();
     }
