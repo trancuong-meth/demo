@@ -10,7 +10,7 @@
 <%@ taglib prefix="f" uri="jakarta.tags.functions" %>
 <html>
 <head>
-    <title>Danh sách chức vụ</title>
+    <title>Danh sách hoá đơn</title>
     <link rel="stylesheet" href="/demo_war_exploded/css/bootstrap.css">
 </head>
 <body class="container">
@@ -18,31 +18,45 @@
     <thead>
     <tr>
         <th scope="col">Mã</th>
-        <th scope="col">Tên</th>
+        <th scope="col">Ngày tạo</th>
+        <th scope="col">Ngày thanh Toán</th>
+        <th scope="col">Ngày ship</th>
+        <th scope="col">Ngày nhận</th>
+        <th scope="col">Tên nguời nhận</th>
+        <th scope="col">Địa chỉ</th>
+        <th scope="col">SDT</th>
+        <th scope="col">Tình trạng</th>
         <th scope="col">Khác</th>
     </tr>
     </thead>
     <tbody>
-    <c:if test="${f:length(listCV) == 0}">
+    <c:if test="${f:length(listHD) == 0}">
         <span>
             Không có dữ liệu
         </span>
     </c:if>
-    <c:if test="${f:length(listCV) != 0}">
-        <c:forEach items="${listCV}" var="cv">
+    <c:if test="${f:length(listHD) != 0}">
+        <c:forEach items="${listHD}" var="hd">
             <tr>
-                <td>${ cv.ma }</td>
-                <td>${ cv.ten }</td>
+                <td>${ hd.ma }</td>
+                <td>${ hd.ngayTao }</td>
+                <td>${ hd.ngayThanhToan }</td>
+                <td>${ hd.ngayShip }</td>
+                <td>${ hd.ngayNhan }</td>
+                <td>${ hd.tenNguoiNhan }</td>
+                <td>${ hd.diaChi }</td>
+                <td>${ hd.sdt }</td>
+                <td>${ hd.tinhTrang }</td>
                 <td>
-                    <a class="btn btn-success" role="button" href="/demo_war_exploded/chuc-vu/edit?ma=${ cv.ma }">Cập nhật</a>
-                    <a class="btn btn-danger" role="button" href="/demo_war_exploded/chuc-vu/delete?ma=${ cv.ma }">Xoá</a>
+                    <a class="btn btn-success" role="button" href="/demo_war_exploded/chuc-vu/edit?ma=${ hd.ma }">Cập nhật</a>
+                    <a class="btn btn-danger" role="button" href="/demo_war_exploded/chuc-vu/delete?ma=${ hd.ma }">Xoá</a>
                 </td>
             </tr>
         </c:forEach>
     </c:if>
     </tbody>
 </table>
-<a class="btn btn-success" role="button" href="/demo_war_exploded/chuc-vu/create">Thêm mới</a>
+<a class="btn btn-success" role="button" href="/demo_war_exploded/hoa-don/create">Thêm mới</a>
 <script src="/demo_war_exploded/js/bootstrap.js"></script>
 </body>
 </html>

@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Thêm mới khách hàng</title>
+    <title>Thêm mới nhân viên</title>
     <link rel="stylesheet" href="/demo_war_exploded/css/bootstrap.min.css"/>
 </head>
 <body class="container">
@@ -19,8 +19,14 @@
           onsubmit="return validateForm()">
         <div class="row">
             <div class="col-6">
-                <label>Mã</label>
-                <input type="text" name="ma" class="form-control" />
+                <input type="submit" class="btn btn-primary" value="Thêm mới"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <label for="ma">Mã</label>
+                <input type="text" id="ma" name="ma" class="form-control"/>
+                <span class="error-message" id="username-error"></span>
             </div>
             <div class="col-6">
                 <label for="ten">Tên</label>
@@ -41,16 +47,16 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-6">
+            <div class="col-12">
                 <label>Giới tính</label>
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="gioiTinh" id="nam"
-                           value="Nam"/>
+                           value="Nam" ${ nv.gioiTinh == "Nam" ? "checked" : ""}/>
                     <label class="form-check-label" for="nam">Nam</label>
                 </div>
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="gioiTinh" id="nu"
-                           value="Nữ"/>
+                           value="Nữ" ${ nv.gioiTinh == "Nữ" ? "checked" : ""}/>
                     <label class="form-check-label" for="nu">Nữ</label>
                 </div>
             </div>
@@ -80,26 +86,21 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-6">
+            <div class="col-12">
                 <label>Trạng thái</label>
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="trangThai" id="dlv"
-                           value="0"/>
+                           value="Đang làm việc" ${ nv.trangThai == "0" ? "checked" : ""}/>
                     <label class="form-check-label" for="dlv">Đã nghỉ việc</label>
                 </div>
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="trangThai" id="dnv"
-                           value="1"/>
+                           value="Đã nghỉ việc" ${ nv.trangThai == "1" ? "checked" : ""}/>
                     <label class="form-check-label" for="dnv">Đã nghỉ việc</label>
                 </div>
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-6">
-                <input type="submit" class="btn btn-primary" value="Thêm nhân viên"/>
-            </div>
-        </div>
     </form>
 </div>
 
@@ -116,59 +117,36 @@
             mat_khau = document.forms["myForm"]["matKhau"].value,
             sdt = document.forms["myForm"]["sdt"].value;
         if (ten == "") {
-            document.getElementById("username-error1").innerHTML = "Vui lòng nhập tên chức vụ";
+            document.getElementById("username-error1").innerHTML = "Vui lòng nhập tên";
             flag = false;
-        } else {
-            document.getElementById("username-error1").innerHTML = ""
         }
-
         if (ma == "") {
             document.getElementById("username-error").innerHTML = "Vui lòng nhập mã chức vụ";
             flag = false;
-        } else {
-            document.getElementById("username-error").innerHTML = ""
         }
-
         if (ngay_sinh == "") {
             document.getElementById("username-error4").innerHTML = "Vui lòng nhập mã chức vụ";
             flag = false;
-        } else {
-            document.getElementById("username-error4").innerHTML = ""
         }
-
         if (ten_dem == "") {
             document.getElementById("username-error2").innerHTML = "Vui lòng nhập mã chức vụ";
             flag = false;
-        } else {
-            document.getElementById("username-error2").innerHTML = ""
         }
-
         if (ho == "") {
             document.getElementById("username-error3").innerHTML = "Vui lòng nhập mã chức vụ";
             flag = false;
-        } else {
-            document.getElementById("username-error3").innerHTML = ""
         }
-
         if (mat_khau == "") {
             document.getElementById("username-error7").innerHTML = "Vui lòng nhập mã chức vụ";
             flag = false;
-        } else {
-            document.getElementById("username-error7").innerHTML = ""
         }
-
         if (dia_chi == "") {
             document.getElementById("username-error6").innerHTML = "Vui lòng nhập mã chức vụ";
             flag = false;
-        } else {
-            document.getElementById("username-error6").innerHTML = ""
         }
-
         if (sdt == "") {
             document.getElementById("username-error5").innerHTML = "Vui lòng nhập mã chức vụ";
             flag = false;
-        } else {
-            document.getElementById("username-error5").innerHTML = ""
         }
         return flag;
     }

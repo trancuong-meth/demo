@@ -2,6 +2,7 @@ package Repository;
 
 import Entity.NhanVien;
 import Utitils.Hiberbnate;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
 import org.hibernate.Session;
 
@@ -65,6 +66,22 @@ public class NhanVienRepository {
         TypedQuery<NhanVien> q = this.hSession.createQuery(hql, NhanVien.class);
         q.setParameter(1, ma);
         return q.getSingleResult();
+    }
+
+    public NhanVien login(String ma, String matKhau)
+    {
+        String hql = "SELECT nvObj FROM NhanVien nvObj WHERE nvObj.ma = ?1 AND nvObj.matKhau = ?2";
+        TypedQuery<NhanVien> q = this.hSession.createQuery(hql, NhanVien.class);
+        q.setParameter(1, ma);
+        q.setParameter(2, matKhau);
+
+        try {
+            NhanVien nv = q.getSingleResult();
+            return nv;
+        } catch (NoResultException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
 

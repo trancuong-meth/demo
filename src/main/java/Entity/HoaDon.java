@@ -2,13 +2,15 @@ package Entity;
 
 import jakarta.persistence.*;
 
+import java.sql.Date;
+import java.util.UUID;
+
 @Entity
-@Table(name = "HoaDon")
 public class HoaDon {
     @Id
     @Column(name = "Id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
     @Column(name = "IdKH")
     private String idKH;
     @Column(name = "IdNV")
@@ -16,13 +18,13 @@ public class HoaDon {
     @Column(name = "Ma")
     private String ma;
     @Column(name = "NgayTao")
-    private String ngayTao;
+    private Date ngayTao;
     @Column(name = "NgayThanhToan")
-    private String ngayThanhToan;
+    private Date ngayThanhToan;
     @Column(name = "NgayShip")
-    private String ngayShip;
+    private Date ngayShip;
     @Column(name = "NgayNhan")
-    private String ngayNhan;
+    private Date ngayNhan;
     @Column(name = "TinhTrang")
     private String tinhTrang;
     @Column(name = "TenNguoiNhan")
@@ -32,7 +34,7 @@ public class HoaDon {
     @Column(name = "Sdt")
     private String sdt;
 
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 
@@ -48,19 +50,19 @@ public class HoaDon {
         return ma;
     }
 
-    public String getNgayTao() {
+    public Date getNgayTao() {
         return ngayTao;
     }
 
-    public String getNgayThanhToan() {
+    public Date getNgayThanhToan() {
         return ngayThanhToan;
     }
 
-    public String getNgayShip() {
+    public Date getNgayShip() {
         return ngayShip;
     }
 
-    public String getNgayNhan() {
+    public Date getNgayNhan() {
         return ngayNhan;
     }
 
@@ -83,7 +85,7 @@ public class HoaDon {
     public HoaDon() {
     }
 
-    public HoaDon(String id, String idKH, String idNV, String ma, String ngayTao, String ngayThanhToan, String ngayShip, String ngayNhan, String tinhTrang, String tenNguoiNhan, String diaChi, String sdt) {
+    public HoaDon(UUID id, String idKH, String idNV, String ma, Date ngayTao, Date ngayThanhToan, Date ngayShip, Date  ngayNhan, String tinhTrang, String tenNguoiNhan, String diaChi, String sdt) {
         this.id = id;
         this.idKH = idKH;
         this.idNV = idNV;

@@ -7,66 +7,109 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.apache.commons.beanutils.BeanUtils;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 
-@WebServlet
-        ({
-                "hoa-don/index",
-                "hoa-don/delete",
-                "hoa-don/update",
-                "hoa-don/create",
-                "hoa-don/edit",
-                "hoa-don/store"
-        })
+@WebServlet({
+        "/hoa-don/index",
+        "/hoa-don/create",
+        "/hoa-don/store",
+        "/hoa-don/edit",
+        "/hoa-don/update",
+        "/hoa-don/delete"
+})
 public class HoaDonServlet extends HttpServlet {
     private HoaDonRepository hdRepo;
-    private String uri;
+
     public HoaDonServlet() {
         this.hdRepo = new HoaDonRepository();
-        this.uri = null;
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        this.uri = req.getRequestURI();
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        String uri = req.getRequestURI();
 
-        if (this.uri.contains("/create")) {
-            this.create(req,resp);
-        } else if (this.uri.contains("/edit")) {
-            this.edit(req,resp);
-        } else if (this.uri.contains("/delete")) {
-            this.delete(req,resp);
+        if (uri.contains("/create")) {
+            this.create(req, resp);
+        } else if (uri.contains("/edit")) {
+            this.edit(req, resp);
+        } else if (uri.contains("/delete")) {
+            this.delete(req, resp);
         } else {
-            this.index(req,resp);
+            this.index(req, resp);
         }
     }
 
-    public void create(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("views", "/Views/CuaHang/create.jsp");
-        request.getRequestDispatcher("/Views/layout.jsp").forward(request, response);
+    public void create(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        req.setAttribute("views", "/Views/HoaDon/create.jsp");
+        req.getRequestDispatcher("/Views/layout.jsp").forward(req, resp);
     }
-    public void index(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("listHD", this.hdRepo.findAll());
-        request.setAttribute("views", "/Views/HoaDon/index.jsp");
-        request.getRequestDispatcher("/Views/layout.jsp").forward(request, response);
+
+    public void edit(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        String ma = req.getParameter("ma");
+        HoaDon vm = this.hdRepo.findByMa(ma);
+        req.setAttribute("hd", vm);
+        req.setAttribute("views", "/Views/HoaDon/edit.jsp");
+        req.getRequestDispatcher("/Views/layout.jsp").forward(req, resp);
     }
-    public void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String ma = request.getParameter("ma");
-        HoaDon ch = this.hdRepo.findByMa(ma);
-        this.hdRepo.delete(ch);
-        response.sendRedirect("/demo_war_exploded/cua-hang/index");
+
+    public void delete(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        String ma = req.getParameter("ma");
+        HoaDon vm = this.hdRepo.findByMa(ma);
+        this.hdRepo.delete(vm);
+        resp.sendRedirect("/demo_war_exploded/hoa-don/index");
     }
-    public void edit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String ma = request.getParameter("ma");
-        HoaDon kh = this.hdRepo.findByMa(ma);
-        request.setAttribute("ch", kh);
-        request.setAttribute("views", "/Views/CuaHang/edit.jsp");
-        request.getRequestDispatcher("/Views/layout.jsp").forward(request, response);
+
+    public void index(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        req.setAttribute("listHD", this.hdRepo.findAll());
+        req.setAttribute("views", "/Views/HoaDon/index.jsp");
+        req.getRequestDispatcher("/Views/layout.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
+        String uri = req.getRequestURI();
+
+        if (uri.contains("/update")) {
+            this.update(req, resp);
+        } else if (uri.contains("/store")) {
+            this.store(req, resp);
+        } else {
+            resp.sendRedirect("/demo_war_exploded/hoa-don/index");
+        }
+    }
+
+    protected void store(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        HoaDon cv = new HoaDon();
+        try {
+            BeanUtils.populate(cv, request.getParameterMap());
+            this.hdRepo.insert(cv);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        } catch (InvocationTargetException e) {
+            throw new RuntimeException(e);
+        }
+        response.sendRedirect("/demo_war_exploded/hoa-don/index");
+    }
+
+    protected void update(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String ma = request.getParameter("ma");
+        HoaDon domainKH = this.hdRepo.findByMa(ma);
+        try {
+            BeanUtils.populate(domainKH, request.getParameterMap());
+            this.hdRepo.update(domainKH);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        response.sendRedirect("/demo_war_exploded/hoa-don/index");
     }
 }

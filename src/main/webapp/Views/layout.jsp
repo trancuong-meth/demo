@@ -42,6 +42,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/demo_war_exploded/dong-san-pham/index">Dòng sản phẩm</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/demo_war_exploded/hoa-don/index">Hoá đơn</a>
+                    </li>
                 </ul>
             </div>
         </div>
